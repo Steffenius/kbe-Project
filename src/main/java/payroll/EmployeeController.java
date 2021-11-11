@@ -5,6 +5,7 @@
 package payroll;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.springframework.hateoas.CollectionModel;
@@ -60,7 +61,7 @@ class EmployeeController {
     // Single item
 
     @GetMapping("/employees/{id}")
-    EntityModel<Employee> one(@PathVariable Long id) {
+    EntityModel<Employee> one(@PathVariable UUID id) {
 
         Employee employee = repository.findById(id) //
                 .orElseThrow(() -> new EmployeeNotFoundException(id));
@@ -69,7 +70,7 @@ class EmployeeController {
     }
 
     @PutMapping("/employees/{id}")
-    ResponseEntity<?> replaceEmployee(@RequestBody Employee newEmployee, @PathVariable Long id) {
+    ResponseEntity<?> replaceEmployee(@RequestBody Employee newEmployee, @PathVariable UUID id) {
 
         Employee updatedEmployee = repository.findById(id) //
                 .map(employee -> {
@@ -90,7 +91,7 @@ class EmployeeController {
     }
 
     @DeleteMapping("/employees/{id}")
-    ResponseEntity<?> deleteEmployee(@PathVariable Long id) {
+    ResponseEntity<?> deleteEmployee(@PathVariable UUID id) {
 
         repository.deleteById(id);
 

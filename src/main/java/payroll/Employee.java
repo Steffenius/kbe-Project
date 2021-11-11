@@ -6,6 +6,7 @@ package payroll;
  */
 
 import java.util.Objects;
+import java.util.UUID;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,7 +15,7 @@ import javax.persistence.Id;
 @Entity
 class Employee {
 
-    private @Id @GeneratedValue Long id;
+    private @Id @GeneratedValue UUID id;
     private String firstName;
     private String lastName;
     private String role;
@@ -26,12 +27,13 @@ class Employee {
 
     Employee(String firstName, String lastName, String role) {
 
+        this.id = UUID.randomUUID();
         this.firstName = firstName;
         this.lastName  = lastName;
         this.role = role;
     }
 
-    public Long getId() {
+    public UUID getId() {
         return this.id;
     }
 
@@ -51,7 +53,7 @@ class Employee {
         return this.role;
     }
 
-    public void setId(Long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
