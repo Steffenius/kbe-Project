@@ -10,11 +10,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
+@RestController
 public class ProductController {
 
 
@@ -51,16 +53,16 @@ public class ProductController {
         // Single item
 
         @GetMapping("/products/{id}")
-        EntityModel<Product> one(@PathVariable Long id) {
+        EntityModel<Product> one(@PathVariable UUID id) {
 
-            Product employee = repository.findById(id) //
+            Product product = repository.findById(id) //
                     .orElseThrow(() -> new ProductNotFoundException(id));
 
-            return assembler.toModel(employee);
+            return assembler.toModel(product);
         }
 
         @PutMapping("/products/{id}")
-        ResponseEntity<?> replaceProduct(@RequestBody Product newProduct, @PathVariable Long id) {
+        ResponseEntity<?> replaceProduct(@RequestBody Product newProduct, @PathVariable UUID id) {
 
             Product updatedProduct = repository.findById(id) //
                     .map(product -> {
@@ -68,7 +70,7 @@ public class ProductController {
                         return repository.save(product);
                     }) //
                     .orElseGet(() -> {
-                        newProduct.setId(id);
+                        //newProduct.setId(id);
                         return repository.save(newProduct);
                     });
 
@@ -80,7 +82,7 @@ public class ProductController {
         }
 
         @DeleteMapping("/products/{id}")
-        ResponseEntity<?> deleteProduct(@PathVariable Long id) {
+        ResponseEntity<?> deleteProduct(@PathVariable UUID id) {
 
             repository.deleteById(id);
 

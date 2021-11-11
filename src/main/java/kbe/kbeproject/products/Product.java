@@ -7,13 +7,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.util.Objects;
+import java.util.UUID;
 
 @Entity
 class Product {
 
-    private @Id
-    @GeneratedValue
-    Long id;
+    private @Id @GeneratedValue UUID id = UUID.randomUUID();
     private String name;
     private int price;
     private String color;
@@ -45,7 +44,8 @@ class Product {
         this.camera = camera;
     }
 
-    public Long getId() {
+
+    public UUID getId() {
         return this.id;
     }
 
@@ -87,10 +87,6 @@ class Product {
 
     public String getCamera() {
         return camera;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public void setName(String name) {
@@ -160,9 +156,21 @@ class Product {
         return Objects.hash(this.id, this.name);
     }
 
+
     @Override
     public String toString() {
-        return "Product{" + "id=" + this.id + ", " +
-                "Name='" + this.name + '\'';
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                ", color='" + color + '\'' +
+                ", displaySize=" + displaySize +
+                ", chip='" + chip + '\'' +
+                ", memory='" + memory + '\'' +
+                ", deliveryTime=" + deliveryTime +
+                ", location='" + location + '\'' +
+                ", description='" + description + '\'' +
+                ", camera='" + camera + '\'' +
+                '}';
     }
 }
