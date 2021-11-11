@@ -37,9 +37,9 @@ class LoadDatabase {
                                 "Tolles Phone",
                                 "krasse Cam")));
 
-            //employeeRepository.findAll().forEach(employee -> log.info("Preloaded " + employee));
+            productRepository.findAll().forEach(product -> log.info("Preloaded " + product));
 
 
         };
-    }
+    };
 }
