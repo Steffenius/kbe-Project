@@ -3,7 +3,7 @@
  * @author Hitzek, Steffen; Matr.Nr 566507
  * @author Schöbel, Susann; Matr.Nr 571657
  */
-package payroll;
+package kbe.kbeproject.products;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -12,12 +12,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ControllerAdvice
-class EmployeeNotFoundAdvice {
+class ProductsNotFoundAdvice {
 
     @ResponseBody
-    @ExceptionHandler(EmployeeNotFoundException.class)
+    @ExceptionHandler(ProductNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    String employeeNotFoundHandler(EmployeeNotFoundException ex) {
+    String employeeNotFoundHandler(ProductNotFoundException ex) {
         return ex.getMessage();
     }
 }
