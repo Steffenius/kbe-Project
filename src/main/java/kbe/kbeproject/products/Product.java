@@ -23,6 +23,8 @@ class Product {
     private String location;
     private String description;
     private String camera;
+    @CsvBindByName(column = "releaseYear", required = true)
+    private int releaseYear;
 
     // throws some error
     // Employee() {}
@@ -42,6 +44,7 @@ class Product {
         this.location = location;
         this.description = description;
         this.camera = camera;
+        this.releaseYear = releaseYear;
     }
 
 
@@ -69,9 +72,7 @@ class Product {
         return chip;
     }
 
-    public String getMemory() {
-        return memory;
-    }
+    public String getMemory() { return memory; }
 
     public int getDeliveryTime() {
         return deliveryTime;
@@ -88,6 +89,8 @@ class Product {
     public String getCamera() {
         return camera;
     }
+
+    public int getReleaseYear() { return releaseYear; }
 
     public void setName(String name) {
         this.name = name;
@@ -109,9 +112,7 @@ class Product {
         this.chip = chip;
     }
 
-    public void setMemory(String memory) {
-        this.memory = memory;
-    }
+    public void setMemory(String memory) { this.memory = memory; }
 
     public void setDeliveryTime(int deliveryTime) {
         this.deliveryTime = deliveryTime;
@@ -125,9 +126,11 @@ class Product {
         this.description = description;
     }
 
-    public void setCamera(String camera) {
-        this.camera = camera;
-    }
+    public void setCamera(String camera) { this.camera = camera; }
+
+    public void setReleaseYear(int releaseYear) { this.releaseYear = releaseYear; }
+
+
 
     @Override
     public boolean equals(Object o) {
@@ -171,6 +174,7 @@ class Product {
                 ", location='" + location + '\'' +
                 ", description='" + description + '\'' +
                 ", camera='" + camera + '\'' +
+                ", release Year='" + releaseYear + '\'' +
                 '}';
     }
 }
