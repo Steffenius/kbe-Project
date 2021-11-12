@@ -3,25 +3,40 @@ package kbe.kbeproject.products;/*
  * @author Schöbel, Susann; Matr.Nr 571657
  */
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.util.Objects;
 import java.util.UUID;
 
+import com.opencsv.bean.CsvBindByName;
+
 @Entity
 class Product {
 
     private @Id @GeneratedValue UUID id = UUID.randomUUID();
+
+    @CsvBindByName(column = "name", required = true)
     private String name;
+    @CsvBindByName(column = "price", required = true)
     private int price;
+    @CsvBindByName(column = "color", required = true)
     private String color;
+    @CsvBindByName(column = "displaySize", required = true)
     private Double displaySize;
+    @CsvBindByName(column = "chip", required = true)
     private String chip;
+    @CsvBindByName(column = "memory", required = true)
     private String memory;
+    @CsvBindByName(column = "deliveryTime", required = true)
     private int deliveryTime;
+    @CsvBindByName(column = "location", required = true)
     private String location;
+    @Column(columnDefinition="varchar(1000)")
+    @CsvBindByName(column = "description", required = true)
     private String description;
+    @CsvBindByName(column = "camera", required = true)
     private String camera;
     @CsvBindByName(column = "releaseYear", required = true)
     private int releaseYear;
