@@ -13,6 +13,7 @@ import java.util.UUID;
 import com.opencsv.bean.CsvBindByName;
 
 @Entity
+public
 class Product {
 
     private @Id @GeneratedValue UUID id = UUID.randomUUID();
@@ -46,8 +47,8 @@ class Product {
     public Product(){}
 
 
-    Product(String name, int price, String color,Double displaySize, String chip,
-            String memory,int deliveryTime, String location, String description, String camera) {
+    public Product(String name, int price, String color,Double displaySize, String chip,
+            String memory,int deliveryTime, String location, String description, String camera, int releaseYear) {
 
         this.name = name;
         this.price  = price;
