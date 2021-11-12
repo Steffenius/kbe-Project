@@ -43,7 +43,7 @@ class Product {
     private int releaseYear;
 
     // throws some error
-    // Employee() {}
+    // Product(){}
     public Product(){}
 
 
