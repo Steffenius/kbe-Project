@@ -10,20 +10,27 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import payroll.*;
+
+import java.io.FileNotFoundException;
+import java.net.URISyntaxException;
+import java.util.List;
 
 @Configuration
 class LoadDatabase {
 
     private static final Logger log = LoggerFactory.getLogger(LoadDatabase.class);
+    // Creates List of Product taking from CsvImporter
+    private List<Product> productList = new CsvImporter("pineAppleProducts.csv").getProductsFromCSV();
+
+    LoadDatabase() throws FileNotFoundException, URISyntaxException {
+    }
 
 
     @Bean
     CommandLineRunner initDatabase(@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection") ProductRepository productRepository) {
         // an Error like "Could not autowire. No beans of 'ClassRepository' type found." can be ignored,
         // because it exists in ClassRepository-Interface.
-        // see @ EmployeeRepository (interface) or/and  OrderRepository (interface)
-
+        // see @ ProductRepository (interface)
         return args -> {
             log.info("Preloading " + productRepository.save(
                     new Product("phone",
@@ -35,8 +42,10 @@ class LoadDatabase {
                                 3,
                                 "Berlin",
                                 "Tolles Phone",
-                                "krasse Cam")));
-
+                                "krasse Cam",
+                                2020)));
+            // puts every Object from productList in Database
+            productList.forEach(product -> log.info("Preloading " + productRepository.save(product)));
             productRepository.findAll().forEach(product -> log.info("Preloaded " + product));
 
 
