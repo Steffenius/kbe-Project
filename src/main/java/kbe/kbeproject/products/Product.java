@@ -166,7 +166,8 @@ class Product {
                    Objects.equals(this.deliveryTime, product.deliveryTime) &&
                    Objects.equals(this.location, product.location) &&
                    Objects.equals(this.description, product.description) &&
-                   Objects.equals(this.camera, product.camera);
+                   Objects.equals(this.camera, product.camera) &&
+                   Objects.equals(this.releaseYear, product.releaseYear);
 
     }
 
