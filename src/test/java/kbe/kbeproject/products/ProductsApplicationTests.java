@@ -30,7 +30,7 @@ class ProductsApplicationTests {
 	@BeforeAll
 	public static void init() throws URISyntaxException, FileNotFoundException {
 		testProdukt1 =  new Product("pinePhone 13 pro",
-				1500,
+				1500.00,
 				"sierrablau",
 				6.1,
 				"A15",
@@ -42,7 +42,7 @@ class ProductsApplicationTests {
 				2021
 		);
 		testProdukt2 =  new Product("pinePhone 12",
-				799,
+				799.00,
 				"red",
 				5.9,
 				"A14",
@@ -72,14 +72,14 @@ class ProductsApplicationTests {
 
 	@Test
 	void testMehrwertSteuerCalculator1() {
-		Double exp = 285.0;
-		Double res = mwstCalc.getMehrwertSteuer(testProdukt1);
+		Double exp = 1785.0;
+		Double res = mwstCalc.getMehrwertSteuer(testProdukt1).getPrice();
 		assertEquals(exp,res);
 	}
 	@Test
 	void testMehrwertSteuerCalculator2() {
-		Double exp = 151.81;
-		Double res = mwstCalc.getMehrwertSteuer(testProdukt2);
+		Double exp = 950.81;
+		Double res = mwstCalc.getMehrwertSteuer(testProdukt2).getPrice();
 		assertEquals(exp,res);
 	}
 

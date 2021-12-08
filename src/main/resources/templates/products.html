@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Products</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        th {
+            border-bottom: 3px solid black;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>This is the Products Page something</h2>
+    <div align="center">
+        <a th:href="@{products}">Products</a>
+    </div>
+
+
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Color</th>
+                <th>Display Size</th>
+                <th>Chip</th>
+                <th>Memory</th>
+                <th>Delivery Time</th>
+                <th>Location</th>
+                <th>Camera</th>
+                <th>Release Year</th>
+                <th>Description</th>
+            </tr>
+            <!--/*@thymesVar id="products" type="kbe.kbeproject.products.Product"*/-->
+            <tr th:each="product : ${products}">
+                <td th:text="${product.name}">Default"></td>
+                <td th:text="${product.price}">Default"></td>
+                <td th:text="${product.color}">Default"></td>
+                <td th:text="${product.displaySize}">Default"></td>
+                <td th:text="${product.chip}">Default"></td>
+                <td th:text="${product.memory}">Default"></td>
+                <td th:text="${product.deliveryTime}">Default"></td>
+                <td th:text="${product.location}">Default"></td>
+                <td th:text="${product.camera}">Default"></td>
+                <td th:text="${product.releaseYear}">Default"></td>
+                <td th:text="${product.description}">Default"></td>
+            </tr>
+        </table>
+
+</body>
+</html>
+

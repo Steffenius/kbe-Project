@@ -21,7 +21,7 @@ class Product {
     @CsvBindByName(column = "name", required = true)
     private String name;
     @CsvBindByName(column = "price", required = true)
-    private int price;
+    private Double price;
     @CsvBindByName(column = "color", required = true)
     private String color;
     @CsvBindByName(column = "displaySize", required = true)
@@ -47,8 +47,8 @@ class Product {
     public Product(){}
 
 
-    public Product(String name, int price, String color,Double displaySize, String chip,
-            String memory,int deliveryTime, String location, String description, String camera, int releaseYear) {
+    public Product(String name, Double price, String color, Double displaySize, String chip,
+                   String memory, int deliveryTime, String location, String description, String camera, int releaseYear) {
 
         this.name = name;
         this.price  = price;
@@ -72,7 +72,7 @@ class Product {
         return name;
     }
 
-    public int getPrice() {
+    public Double getPrice() {
         return price;
     }
 
@@ -112,7 +112,7 @@ class Product {
         this.name = name;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 

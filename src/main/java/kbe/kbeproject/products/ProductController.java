@@ -3,6 +3,7 @@ package kbe.kbeproject.products;/*
  * @author Schöbel, Susann; Matr.Nr 571657
  */
 
+import kbe.kbeproject.services.MehrwertSteuerCalculator;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.IanaLinkRelations;
@@ -36,7 +37,7 @@ public class ProductController {
                     .map(assembler::toModel) //
                     .collect(Collectors.toList());
 
-            return CollectionModel.of(products, linkTo(methodOn(ProductController.class).all()).withSelfRel());
+            return CollectionModel.of(products); //, linkTo(methodOn(ProductController.class).all()).withSelfRel());
         }
 
         @PostMapping("/products")
@@ -59,6 +60,31 @@ public class ProductController {
                     .orElseThrow(() -> new ProductNotFoundException(id));
 
             return assembler.toModel(product);
+        }
+
+        // MehrwertSteuer Single item
+        @GetMapping("/products/mwstCalculator/{id}")
+        EntityModel<Product> two(@PathVariable UUID id) {
+
+            Product actual = repository.findById(id) //
+                    .orElseThrow(() -> new ProductNotFoundException(id));
+
+            MehrwertSteuerCalculator calculator = new MehrwertSteuerCalculator();
+
+            return assembler.toModel(calculator.getMehrwertSteuer(actual));
+        }
+
+        // Mehrwertsteuer all items
+        @GetMapping("/products/mwstCalculator")
+        CollectionModel<EntityModel<Product>> allWithMehrwertSteuer() {
+
+            MehrwertSteuerCalculator calculator = new MehrwertSteuerCalculator();
+
+            List<EntityModel<Product>> products = repository.findAll().stream() //
+                    .map(prod -> assembler.toModel(calculator.getMehrwertSteuer(prod))) //
+                    .collect(Collectors.toList());
+
+            return CollectionModel.of(products); //, linkTo(methodOn(ProductController.class).all()).withSelfRel());
         }
 
         @PutMapping("/products/{id}")
