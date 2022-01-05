@@ -5,6 +5,7 @@ package kbe.kbeproject.products;/*
 
 
 import com.opencsv.bean.CsvToBeanBuilder;
+import org.springframework.context.annotation.Bean;
 
 import java.io.*;
 import java.net.URISyntaxException;
@@ -21,14 +22,14 @@ public class CsvImporter {
         // creating absolute path for given resource-file
         // !!! file must be placed in folder resources !!! otherwise fileNotFoundException
         URL resource = CsvImporter.class.getClassLoader().getResource(resourceFile);
-        File file = Paths.get(resource.toURI()).toFile();
-        this.resourceFile = file.getAbsolutePath();
+        this.resourceFile = resource.getPath();//file.getAbsolutePath();
 
     }
 
     // Method returns a List<Product> where Product is created from Entries in .CSV-resourcefile
+    @Bean
     public List<Product> getProductsFromCSV() throws FileNotFoundException {
-        return new CsvToBeanBuilder(new FileReader(this.resourceFile))
+        return new CsvToBeanBuilder(new FileReader(String.valueOf(this.resourceFile)))
                 .withType(Product.class).build().parse();
     }
 
